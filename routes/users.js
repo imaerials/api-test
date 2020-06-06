@@ -36,11 +36,12 @@ router.post('/create',(req,res)=>{
 })
 //login user
 router.post('/login',async (req,res)=>{
-  const {username, password} = req.body
-  
+  const {email,username, password} = req.body
+ // const user = User.
   res.status(200).json({
     username,
-    password
+    password,
+    email
   })
 })
 
