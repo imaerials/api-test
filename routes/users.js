@@ -5,25 +5,32 @@ const mongoose = require('mongoose')
 
 /* GET users listing. */
 router.get('/', (req, res) =>{
+  console.log('Index users')
   res.status(200).json({
     msg: 'Estas en users'
   })
+  
+
+});
+router.get('/list', async(req, res) =>{
+  console.log('listing users')
+
+ const users= await User.find({},(err,users)=>{
+    res.status(200).json({
+      users
+    })
+ })
+  
 
 });
 router.post('/create',async (req,res)=>{
-  const {username, password} = req.body
+  console.log('creating users')
     await User.create({...req.body},(err,user)=>{
-      console.log(user)
+      res.status(200).json({
+        user
+      })
 
-    })
-
-
-
-  res.status(200).json({
-    msg:'Creando usuario',
-    userCreated: username,
-    passwordCreated: password
-  })
+    }) 
 })
 
 
