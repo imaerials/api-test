@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+const User = require('../models/User')
+const mongoose = require('mongoose')
 
 /* GET users listing. */
 router.get('/', (req, res) =>{
@@ -8,13 +10,18 @@ router.get('/', (req, res) =>{
   })
 
 });
-router.post('/create',(req,res)=>{
-  const {user, password} = req.body
+router.post('/create',async (req,res)=>{
+  const {username, password} = req.body
+    await User.create({...req.body},(err,user)=>{
+      console.log(user)
+
+    })
+
 
 
   res.status(200).json({
     msg:'Creando usuario',
-    userCreated: user,
+    userCreated: username,
     passwordCreated: password
   })
 })
