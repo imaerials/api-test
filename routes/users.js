@@ -3,7 +3,7 @@ var router = express.Router();
 const User = require('../models/User')
 const mongoose = require('mongoose')
 
-/* GET users listing. */
+//index users
 router.get('/', (req, res) =>{
   console.log('Index users')
   res.status(200).json({
@@ -12,6 +12,7 @@ router.get('/', (req, res) =>{
   
 
 });
+//List users
 router.get('/list', async(req, res) =>{
   console.log('listing users')
 
@@ -23,16 +24,25 @@ router.get('/list', async(req, res) =>{
   
 
 });
-router.post('/create',async (req,res)=>{
+//create user
+router.post('/create',(req,res)=>{
   console.log('creating users')
-    await User.create({...req.body},(err,user)=>{
+     User.create({...req.body},(err,user)=>{
       res.status(200).json({
         user
       })
 
     }) 
 })
-
+//login user
+router.post('/login',async (req,res)=>{
+  const {username, password} = req.body
+  
+  res.status(200).json({
+    username,
+    password
+  })
+})
 
 
 
