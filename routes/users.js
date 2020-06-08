@@ -2,7 +2,8 @@ var express = require('express');
 var router = express.Router();
 const User = require('../models/User')
 const mongoose = require('mongoose')
-
+const jwt = require('jsonwebtoken')
+const appConfig = require('../config/appConfig')
 //index users
 router.get('/', (req, res) =>{
   console.log('Index users')
@@ -36,12 +37,17 @@ router.post('/create',(req,res)=>{
 })
 //login user
 router.post('/login',async (req,res)=>{
-  const {email,username, password} = req.body
+  const {email,password} = req.body
+  await User.findOne({email},(err,user)=>{
+    jwt.sign({ user}, appConfig.secret, (err, token)=> {
+      console.log(token);
+    });
+
+    console.log('Login user found: ',user)
+  })
  // const user = User.
   res.status(200).json({
-    username,
-    password,
-    email
+    msg: 'ok user'
   })
 })
 
