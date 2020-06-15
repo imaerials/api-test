@@ -1,4 +1,4 @@
-const createError = require('http-errors');
+ const createError = require('http-errors');
 const appConfig = require('./config/appConfig')
 const express = require('express');
 const path = require('path');
@@ -11,6 +11,7 @@ mongoose.connect(appConfig.databaseUri, {useNewUrlParser: true,useUnifiedTopolog
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const passport = require('passport');
 
 
 var db = mongoose.connection;
@@ -19,7 +20,9 @@ db.once('open', function() {
     console.log('Mongo Connected')
 });
 const app = express();
-
+//Passport usage
+app.use(passport.initialize());
+require('./config/passport')(passport)
 
 app.use(logger('dev'));
 app.use(express.json());
