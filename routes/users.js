@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const appConfig = require("../config/appConfig");
 const bcrypt = require("bcrypt");
-const passport = require('passport');
+const passport = require("passport");
 const { Passport } = require("passport");
 //index users
 router.get("/", (req, res) => {
@@ -43,13 +43,12 @@ router.post("/login", async (req, res) => {
     bcrypt.compare(password, user.password, function (err, match) {
       if (match) {
         jwt.sign(
-          { user },
+          { id: user._id, username: user.username, email: user.email },
           appConfig.secret,
           { expiresIn: 3600 },
           (err, token) => {
             return res.status(200).json({
               msg: "Congratss",
-              user: user.name,
               token: "Bearer " + token,
             });
           }
@@ -61,14 +60,18 @@ router.post("/login", async (req, res) => {
       }
     });
 
-    console.log(user.name);
+    // console.log(user.name);
   });
 });
 
-//protected route 
-router.get('/current',passport.authenticate('jwt',{session: false}),(req,res)=>{
-  res.status(200).json({
-    msg: 'Success'
-  })
-})
+//protected route
+router.get(
+  "/current",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    res.status(200).json({
+      msg: "Success",
+    });
+  }
+);
 module.exports = router;
