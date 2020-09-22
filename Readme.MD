@@ -1,5 +1,7 @@
 # Rest API Test
 
+One of many practice for a NodeJs Rest Api using Passport JS and JWT as Authentication.
+
 ## Requirements
 
 * MongoDB
@@ -23,3 +25,4 @@ sudo systemctl start mongod
 | POST | localhost:3000/users/create|
 | POST | localhost:3000/users/login |
 
+To test the API, Postman or similar is recommended. Set Content-Type as "application/x-www-form-urlencoded" in "Headers" and "Body" as "x-www-form-urlencoded"
