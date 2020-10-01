@@ -22,7 +22,11 @@ sudo systemctl start mongod
 | ------ | ------ |
 | GET | localhost:3000/ |
 | GET | localhost:3000/users/list |
+| GET | localhost:3000/products/list|
+| GET | localhost:3000/products|
 | POST | localhost:3000/users/create|
 | POST | localhost:3000/users/login |
+| POST | localhost:3000/products/add|
+
 
 To test the API, Postman or similar is recommended. Set Content-Type as "application/x-www-form-urlencoded" in "Headers" and "Body" as "x-www-form-urlencoded"

@@ -11,6 +11,7 @@ mongoose.connect(appConfig.databaseUri, {useNewUrlParser: true,useUnifiedTopolog
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const productsRouter = require('./routes/products');
 const passport = require('passport');
 
 
@@ -32,6 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/products', productsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
