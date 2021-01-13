@@ -30,3 +30,8 @@ sudo systemctl start mongod
 
 
 To test the API, Postman or similar is recommended. Set Content-Type as "application/x-www-form-urlencoded" in "Headers" and "Body" as "x-www-form-urlencoded"
+
+## Starting the App
+```sh
+npm run dev
+```
